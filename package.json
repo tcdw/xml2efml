@@ -1,6 +1,6 @@
 {
   "name": "xml2efml",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Convert existing XML/HTML to EFML",
   "main": "xml2efml.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tcdw/html2efml.git"
+    "url": "git+https://github.com/tcdw/xml2efml.git"
   },
   "author": "tcdw <tcdw2011@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tcdw/html2efml/issues"
+    "url": "https://github.com/tcdw/xml2efml/issues"
   },
-  "homepage": "https://github.com/tcdw/html2efml#readme",
+  "homepage": "https://github.com/tcdw/xml2efml#readme",
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
