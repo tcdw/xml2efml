@@ -17,7 +17,7 @@ function dom2efml(elem, {
     spaces = '    ',
     ignoreEmptyTextNode = true,
     indentOffset = 0,
-}) {
+} = {}) {
     let output = '';
     /**
      * @param {Element} element
@@ -58,7 +58,7 @@ function htmlSnippet2efml(str, {
     spaces = '    ',
     ignoreEmptyTextNode = true,
     win,
-}) {
+} = {}) {
     let myWindow;
     if (typeof win === 'object') {
         myWindow = win;
@@ -90,7 +90,7 @@ function xml2efml(str, {
     ignoreEmptyTextNode = true,
     win,
     type = 'text/xml',
-}) {
+} = {}) {
     let myWindow;
     if (typeof win === 'object') {
         myWindow = win;
