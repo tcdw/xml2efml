@@ -1,0 +1,25 @@
+{
+  "name": "html2efml",
+  "version": "1.0.0",
+  "description": "Convert existing HTML to EFML",
+  "main": "html2efml.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcdw/html2efml.git"
+  },
+  "author": "tcdw <tcdw2011@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tcdw/html2efml/issues"
+  },
+  "homepage": "https://github.com/tcdw/html2efml#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "jsdom": "^15.1.1"
+  }
+}
