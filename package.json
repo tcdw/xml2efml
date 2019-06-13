@@ -1,11 +1,8 @@
 {
   "name": "xml2efml",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Convert existing XML/HTML to EFML",
   "main": "xml2efml.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tcdw/xml2efml.git"

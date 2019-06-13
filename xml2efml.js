@@ -27,8 +27,15 @@ function dom2efml(elem, {
         if (indent === undefined) {
             indent = 0;
         }
-        output += `${spaces.repeat(indent)}>${element.tagName}\n`;
+        output += `${spaces.repeat(indent)}>${element.tagName}`;
+        Array.prototype.forEach.call(element.classList, (e) => {
+            output += `.${e}`;
+        });
+        output += '\n';
         Array.prototype.forEach.call(element.attributes, (e) => {
+            if (e.name === 'class') {
+                return;
+            }
             output += `${spaces.repeat(indent + 1)}#${e.name} = ${e.value}\n`;
         });
         Array.prototype.forEach.call(element.childNodes, (e) => {
@@ -39,7 +46,7 @@ function dom2efml(elem, {
                 }
                 case 3: {
                     if (!ignoreEmptyTextNode || e.textContent.trim() !== '') {
-                        output += `${spaces.repeat(indent + 1)}.${e.textContent.replace(/\n/g, '&n').replace(/&/g, '&&')}\n`;
+                        output += `${spaces.repeat(indent + 1)}.${e.textContent.replace(/&/g, '&&').replace(/\n/g, '&n')}\n`;
                     }
                     break;
                 }
@@ -71,13 +78,24 @@ function htmlSnippet2efml(str, {
     const parser = new myWindow.DOMParser();
     const data = parser.parseFromString(str, 'text/html');
     function loop(e) {
-        if (e instanceof myWindow.Element) {
-            result += dom2efml(e, {
-                spaces,
-                ignoreEmptyTextNode,
-            });
-        } else {
-            console.warn(`There is a non-element node (${e.nodeType}, ${nodeTypeMap[e.nodeType]}) couldn't be handled by this converter`);
+        switch (e.nodeType) {
+            case 1: {
+                result += dom2efml(e, {
+                    spaces,
+                    ignoreEmptyTextNode,
+                });
+                break;
+            }
+            case 3: {
+                if (!ignoreEmptyTextNode || e.textContent.trim() !== '') {
+                    result += `.${e.textContent.replace(/&/g, '&&').replace(/\n/g, '&n')}\n`;
+                }
+                break;
+            }
+            default: {
+                console.warn(`The nodeType value is ${e.nodeType} (${nodeTypeMap[e.nodeType]}), which didn't handled by dom2efml`);
+                break;
+            }
         }
     }
     Array.prototype.forEach.call(data.head.childNodes, loop);
