@@ -14,13 +14,13 @@ npm install xml2efml jsdom
 ## General XML/HTML Parsing
 
 ```javascript
-const XML2EFML = require('xml2efml');
+const xml2efml = require('xml2efml');
 const { JSDOM } = require('jsdom');
 
 // This is our window
 const { window } = new JSDOM('');
 
-const dom1 = XML2EFML.xml2efml(`
+const dom1 = xml2efml.xml2efml(`
 <derp>
     <subDerp id="1">Alice</subDerp>
     <subDerp id="2">Bob</subDerp>
@@ -31,7 +31,7 @@ const dom1 = XML2EFML.xml2efml(`
     // 2 spaces: '  '
     // 4 spaces: '    '
     // tab:      '\t'
-    // Default: '    '
+    // Default:  '    '
     spaces: '    ',
     // Will ignore any empty (or only has blank characters) text node. Default: true
     ignoreEmptyTextNode: true,
@@ -60,11 +60,11 @@ And `dom1` will become:
 ## HTML Snippet Parsing
 
 ```javascript
-const XML2EFML = require('xml2efml');
+const xml2efml = require('xml2efml');
 const { JSDOM } = require('jsdom');
 const { window } = new JSDOM('');
 
-const dom2 = XML2EFML.htmlSnippet2efml(`
+const dom2 = xml2efml.htmlSnippet2efml(`
 <p>I am a <b>text</b>!</p>This also works now!
 <div class="my-class such good mame" data-potato="tasty">
 Such<hr>Content
@@ -94,6 +94,31 @@ And `dom2` will become:
     .&nSuch
     >HR
     .Content&n
+```
+
+## Parsing Existing DOMs
+
+You can also using `xml2efml.dom2efml()` standalone, including the Developer Tools console.
+
+### Load the Library
+
+```javascript
+// You can also save this snippet as bookmark! (with `javascript:` prefix)
+var s = document.createElement('script');
+s.src = "https://bundle.run/xml2efml";
+document.body.appendChild(s);
+```
+
+After the script loaded...
+
+```javascript
+// This function returns the converted EFML of any DOMs user specified
+xml2efml.dom2efml(document.querySelector('.nav-menu'), {
+    spaces: '    ',
+    ignoreEmptyTextNode: true,
+    // How many extra indents we should add at beginning of every line?
+    indentOffset: 0,
+});
 ```
 
 ## License
