@@ -105,6 +105,7 @@ You can also using `xml2efml.dom2efml()` standalone, including the Developer Too
 ```javascript
 // You can also save this snippet as bookmark! (with `javascript:` prefix)
 var s = document.createElement('script');
+// bundle.run is an awesome online tool let you bundle your JavaScript libraries on the fly. Be sure check it out!
 s.src = "https://bundle.run/xml2efml";
 document.body.appendChild(s);
 ```
