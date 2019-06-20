@@ -122,6 +122,20 @@ xml2efml.dom2efml(document.querySelector('.nav-menu'), {
 });
 ```
 
+## AST Output
+
+You can also get the ef.js AST with these functions:
+
+| EFML | AST equipment |
+| - | - |
+| `dom2efml` | `dom2ast` |
+| `htmlSnippet2efml` | `htmlSnippet2ast` |
+| `xml2efml` | `xml2ast` |
+
+All of AST outputing function's usage are exactly same as EFML's, except `spaces` and `indentOffset`, which is pointless for AST output.
+
+The AST returned from these functions are in the same format as what [eft-parser](https://www.npmjs.com/package/eft-parser) outputs.
+
 ## License
 
 MIT

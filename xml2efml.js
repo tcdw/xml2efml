@@ -61,6 +61,47 @@ function dom2efml(elem, {
     return output;
 }
 
+/**
+ * @param {Element} elem
+ */
+function dom2ast(elem, {
+    ignoreEmptyTextNode = true,
+} = {}) {
+    const myRoot = [];
+    const myTag = {
+        t: elem.tagName,
+    };
+    const myAttr = {};
+    Array.prototype.forEach.call(elem.attributes, (e) => {
+        myAttr[e.name] = e.value;
+    });
+    if (Object.keys(myAttr).length > 0) {
+        myTag.a = myAttr;
+    }
+    myRoot.push(myTag);
+    Array.prototype.forEach.call(elem.childNodes, (e) => {
+        switch (e.nodeType) {
+            case 1: {
+                myRoot.push(dom2ast(e, {
+                    ignoreEmptyTextNode,
+                }));
+                break;
+            }
+            case 3: {
+                if (!ignoreEmptyTextNode || e.textContent.trim() !== '') {
+                    myRoot.push(e.textContent);
+                }
+                break;
+            }
+            default: {
+                console.warn(`The nodeType value is ${e.nodeType} (${nodeTypeMap[e.nodeType]}), which didn't handled by dom2efml`);
+                break;
+            }
+        }
+    });
+    return myRoot;
+}
+
 function htmlSnippet2efml(str, {
     spaces = '    ',
     ignoreEmptyTextNode = true,
@@ -72,7 +113,7 @@ function htmlSnippet2efml(str, {
     } else if (typeof window !== 'undefined') {
         myWindow = window;
     } else {
-        throw new ReferenceError('html2efml requires a window');
+        throw new ReferenceError('htmlSnippet2efml requires a window');
     }
     let result = '';
     const parser = new myWindow.DOMParser();
@@ -103,6 +144,52 @@ function htmlSnippet2efml(str, {
     return result;
 }
 
+function htmlSnippet2ast(str, {
+    ignoreEmptyTextNode = true,
+    win,
+} = {}) {
+    let myWindow;
+    if (typeof win === 'object') {
+        myWindow = win;
+    } else if (typeof window !== 'undefined') {
+        myWindow = window;
+    } else {
+        throw new ReferenceError('htmlSnippet2ast requires a window');
+    }
+    const parser = new myWindow.DOMParser();
+    const data = parser.parseFromString(str, 'text/html');
+    const childs = Array.from(data.head.childNodes);
+    Array.prototype.forEach.call(data.body.childNodes, (e) => {
+        childs.push(e);
+    });
+    if (childs.length === 1) {
+        return dom2ast(childs[0], { ignoreEmptyTextNode });
+    }
+    // ========== if has more than 1 childs ==========
+    const root = [{
+        t: 0,
+    }];
+    childs.forEach((e) => {
+        switch (e.nodeType) {
+            case 1: {
+                root.push(dom2ast(e, { ignoreEmptyTextNode }));
+                break;
+            }
+            case 3: {
+                if (!ignoreEmptyTextNode || e.textContent.trim() !== '') {
+                    root.push(e.textContent);
+                }
+                break;
+            }
+            default: {
+                console.warn(`The nodeType value is ${e.nodeType} (${nodeTypeMap[e.nodeType]}), which didn't handled by dom2efml`);
+                break;
+            }
+        }
+    });
+    return root;
+}
+
 function xml2efml(str, {
     spaces = '    ',
     ignoreEmptyTextNode = true,
@@ -115,7 +202,7 @@ function xml2efml(str, {
     } else if (typeof window !== 'undefined') {
         myWindow = window;
     } else {
-        throw new ReferenceError('html2efml requires a window');
+        throw new ReferenceError('xml2efml requires a window');
     }
     const parser = new myWindow.DOMParser();
     const data = parser.parseFromString(str, type);
@@ -126,8 +213,32 @@ function xml2efml(str, {
     return result;
 }
 
+function xml2ast(str, {
+    ignoreEmptyTextNode = true,
+    win,
+    type = 'text/xml',
+} = {}) {
+    let myWindow;
+    if (typeof win === 'object') {
+        myWindow = win;
+    } else if (typeof window !== 'undefined') {
+        myWindow = window;
+    } else {
+        throw new ReferenceError('xml2ast requires a window');
+    }
+    const parser = new myWindow.DOMParser();
+    const data = parser.parseFromString(str, type);
+    const result = dom2ast(data.documentElement, {
+        ignoreEmptyTextNode,
+    });
+    return result;
+}
+
 module.exports = {
     dom2efml,
+    dom2ast,
     htmlSnippet2efml,
+    htmlSnippet2ast,
     xml2efml,
+    xml2ast,
 };
