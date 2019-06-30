@@ -1,6 +1,6 @@
 {
   "name": "xml2efml",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Convert existing XML/HTML to EFML",
   "main": "xml2efml.js",
   "repository": {

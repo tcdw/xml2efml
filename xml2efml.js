@@ -36,7 +36,11 @@ function dom2efml(elem, {
             if (e.name === 'class') {
                 return;
             }
-            output += `${spaces.repeat(indent + 1)}#${e.name} = ${e.value}\n`;
+            output += `${spaces.repeat(indent + 1)}#${e.name}`;
+            if (e.value !== '') {
+                output += ` = ${e.value}`;
+            }
+            output += '\n';
         });
         Array.prototype.forEach.call(element.childNodes, (e) => {
             switch (e.nodeType) {
