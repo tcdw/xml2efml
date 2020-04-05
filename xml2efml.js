@@ -13,6 +13,16 @@ const nodeTypeMap = {
     12: 'NOTATION_NODE',
 };
 
+function findWindow(win) {
+    if (typeof win === 'object') {
+        return win;
+    }
+    if (typeof window !== 'undefined') {
+        return window;
+    }
+    return null;
+}
+
 function dom2efml(elem, {
     spaces = '    ',
     ignoreEmptyTextNode = true,
@@ -111,12 +121,8 @@ function htmlSnippet2efml(str, {
     ignoreEmptyTextNode = true,
     win,
 } = {}) {
-    let myWindow;
-    if (typeof win === 'object') {
-        myWindow = win;
-    } else if (typeof window !== 'undefined') {
-        myWindow = window;
-    } else {
+    const myWindow = findWindow(win);
+    if (!myWindow) {
         throw new ReferenceError('htmlSnippet2efml requires a window');
     }
     let result = '';
@@ -152,12 +158,8 @@ function htmlSnippet2ast(str, {
     ignoreEmptyTextNode = true,
     win,
 } = {}) {
-    let myWindow;
-    if (typeof win === 'object') {
-        myWindow = win;
-    } else if (typeof window !== 'undefined') {
-        myWindow = window;
-    } else {
+    const myWindow = findWindow(win);
+    if (!myWindow) {
         throw new ReferenceError('htmlSnippet2ast requires a window');
     }
     const parser = new myWindow.DOMParser();
@@ -200,12 +202,8 @@ function xml2efml(str, {
     win,
     type = 'text/xml',
 } = {}) {
-    let myWindow;
-    if (typeof win === 'object') {
-        myWindow = win;
-    } else if (typeof window !== 'undefined') {
-        myWindow = window;
-    } else {
+    const myWindow = findWindow(win);
+    if (!myWindow) {
         throw new ReferenceError('xml2efml requires a window');
     }
     const parser = new myWindow.DOMParser();
@@ -222,12 +220,8 @@ function xml2ast(str, {
     win,
     type = 'text/xml',
 } = {}) {
-    let myWindow;
-    if (typeof win === 'object') {
-        myWindow = win;
-    } else if (typeof window !== 'undefined') {
-        myWindow = window;
-    } else {
+    const myWindow = findWindow(win);
+    if (!myWindow) {
         throw new ReferenceError('xml2ast requires a window');
     }
     const parser = new myWindow.DOMParser();
