@@ -126,7 +126,7 @@ xml2efml.dom2efml(document.querySelector('.nav-menu'), {
 
 You can also get the ef.js AST with these functions:
 
-| EFML | AST equipment |
+| EFML | AST |
 | - | - |
 | `dom2efml` | `dom2ast` |
 | `htmlSnippet2efml` | `htmlSnippet2ast` |
