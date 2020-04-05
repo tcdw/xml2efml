@@ -14,9 +14,9 @@
   },
   "homepage": "https://github.com/tcdw/xml2efml#readme",
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
-    "jsdom": "^15.1.1"
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "jsdom": "^16.2.2"
   }
 }
