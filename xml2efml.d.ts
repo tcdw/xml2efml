@@ -25,14 +25,14 @@ export function htmlSnippet2ast(str: string, { ignoreEmptyTextNode, win, }?: {
     t: number;
 }[];
 
-function xml2efml(str: string, { spaces, ignoreEmptyTextNode, win, type, }?: {
+export function xml2efml(str: string, { spaces, ignoreEmptyTextNode, win, type, }?: {
     spaces?: string;
     ignoreEmptyTextNode?: boolean;
     win: Window;
     type?: string;
 }): string;
 
-function xml2ast(str: string, { ignoreEmptyTextNode, win, type, }?: {
+export function xml2ast(str: string, { ignoreEmptyTextNode, win, type, }?: {
     ignoreEmptyTextNode?: boolean;
     win: Window;
     type?: string;
