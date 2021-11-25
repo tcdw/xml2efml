@@ -1,5 +1,7 @@
 # xml2efml
 
+[![version](https://img.shields.io/npm/v/xml2efml.svg)](https://www.npmjs.com/package/xml2efml) ![license](https://img.shields.io/npm/l/xml2efml.svg)
+
 A library let you convert existing XML/HTML/etc. to [EFML](https://ef.js.org/#!guides/efml), which could be used by [ef.js](https://ef.js.org).
 
 ## Install
