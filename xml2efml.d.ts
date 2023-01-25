@@ -1,41 +1,43 @@
-export function dom2efml(elem: Element, { spaces, ignoreEmptyTextNode, indentOffset, }?: {
-    spaces?: string;
+export interface EFMLConverterArgs {
     ignoreEmptyTextNode?: boolean;
+}
+
+export interface DOMToEFMLArgs extends EFMLConverterArgs {
+    spaces?: string;
     indentOffset?: number;
-}): string;
+}
 
-export function dom2ast(elem: Element, { ignoreEmptyTextNode, }?: {
-    ignoreEmptyTextNode?: boolean;
-}): {
-    t: string;
-}[];
+export interface DOMToASTArgs extends EFMLConverterArgs {}
 
-export function htmlSnippet2efml(str: string, { spaces, ignoreEmptyTextNode, win, }?: {
+export interface HTMLSnippetToEFMLArgs extends EFMLConverterArgs {
     spaces?: string;
-    ignoreEmptyTextNode?: boolean;
     win: Window;
-}): string;
+}
 
-export function htmlSnippet2ast(str: string, { ignoreEmptyTextNode, win, }?: {
-    ignoreEmptyTextNode?: boolean;
+export interface HTMLSnippetToASTArgs extends EFMLConverterArgs {
     win: Window;
-}): {
-    t: string;
-}[] | {
-    t: number;
-}[];
+}
 
-export function xml2efml(str: string, { spaces, ignoreEmptyTextNode, win, type, }?: {
+export interface XMLToEFMLArgs extends EFMLConverterArgs {
     spaces?: string;
-    ignoreEmptyTextNode?: boolean;
     win: Window;
     type?: string;
-}): string;
+}
 
-export function xml2ast(str: string, { ignoreEmptyTextNode, win, type, }?: {
-    ignoreEmptyTextNode?: boolean;
+export interface XMLToASTArgs extends EFMLConverterArgs {
     win: Window;
     type?: string;
-}): {
-    t: string;
-}[];
+}
+
+
+export function dom2efml(elem: Element, options?: DOMToEFMLArgs): string;
+
+export function dom2ast(elem: Element, options?: DOMToASTArgs): any;
+
+export function htmlSnippet2efml(str: string, options?: HTMLSnippetToEFMLArgs): string;
+
+export function htmlSnippet2ast(str: string, options?: HTMLSnippetToASTArgs): any;
+
+export function xml2efml(str: string, options?: XMLToEFMLArgs): string;
+
+export function xml2ast(str: string, options?: XMLToASTArgs): any;

@@ -23,7 +23,7 @@ function findWindow(win) {
     return null;
 }
 
-export function dom2efml(elem, {
+function dom2efml(elem, {
     spaces = '    ',
     ignoreEmptyTextNode = true,
     indentOffset = 0,
@@ -78,7 +78,7 @@ export function dom2efml(elem, {
 /**
  * @param {Element} elem
  */
-export function dom2ast(elem, {
+function dom2ast(elem, {
     ignoreEmptyTextNode = true,
 } = {}) {
     const myRoot = [];
@@ -116,7 +116,7 @@ export function dom2ast(elem, {
     return myRoot;
 }
 
-export function htmlSnippet2efml(str, {
+function htmlSnippet2efml(str, {
     spaces = '    ',
     ignoreEmptyTextNode = true,
     win,
@@ -154,7 +154,7 @@ export function htmlSnippet2efml(str, {
     return result;
 }
 
-export function htmlSnippet2ast(str, {
+function htmlSnippet2ast(str, {
     ignoreEmptyTextNode = true,
     win,
 } = {}) {
@@ -196,7 +196,7 @@ export function htmlSnippet2ast(str, {
     return root;
 }
 
-export function xml2efml(str, {
+function xml2efml(str, {
     spaces = '    ',
     ignoreEmptyTextNode = true,
     win,
@@ -215,7 +215,7 @@ export function xml2efml(str, {
     return result;
 }
 
-export function xml2ast(str, {
+function xml2ast(str, {
     ignoreEmptyTextNode = true,
     win,
     type = 'text/xml',
@@ -231,3 +231,12 @@ export function xml2ast(str, {
     });
     return result;
 }
+
+module.exports = {
+    dom2efml,
+    dom2ast,
+    htmlSnippet2efml,
+    htmlSnippet2ast,
+    xml2efml,
+    xml2ast,
+};
