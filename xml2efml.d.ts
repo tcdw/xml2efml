@@ -11,21 +11,21 @@ export interface DOMToASTArgs extends EFMLConverterArgs {}
 
 export interface HTMLSnippetToEFMLArgs extends EFMLConverterArgs {
     spaces?: string;
-    win: Window;
+    win?: Window;
 }
 
 export interface HTMLSnippetToASTArgs extends EFMLConverterArgs {
-    win: Window;
+    win?: Window;
 }
 
 export interface XMLToEFMLArgs extends EFMLConverterArgs {
     spaces?: string;
-    win: Window;
+    win?: Window;
     type?: string;
 }
 
 export interface XMLToASTArgs extends EFMLConverterArgs {
-    win: Window;
+    win?: Window;
     type?: string;
 }
 
