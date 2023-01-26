@@ -4,6 +4,8 @@
 
 A library let you convert existing XML/HTML/etc. to [EFML](https://ef.js.org/#!guides/efml), which could be used by [ef.js](https://ef.js.org).
 
+Since 2.x, this library is avaliable as native ES Module!
+
 ## Install
 
 ```bash
@@ -105,23 +107,18 @@ You can also using `xml2efml.dom2efml()` standalone, including the Developer Too
 ### Load the Library
 
 ```javascript
-// You can also save this snippet as bookmark! (with `javascript:` prefix)
-var s = document.createElement('script');
-// bundle.run is an awesome online tool let you test your JavaScript libraries on the fly. Be sure check it out!
-s.src = "https://bundle.run/xml2efml";
-document.body.appendChild(s);
-```
+(async () => {
+    // Load as native ES Module
+    const { dom2efml } = await import("https://cdn.jsdelivr.net/npm/xml2efml@2/xml2efml.js");
 
-After the script loaded...
-
-```javascript
-// This function returns the converted EFML of any DOMs user specified
-xml2efml.dom2efml(document.querySelector('.nav-menu'), {
-    spaces: '    ',
-    ignoreEmptyTextNode: true,
-    // How many extra indents we should add at beginning of every line?
-    indentOffset: 0,
-});
+    // Returns the converted EFML of any DOMs user specified
+    console.log(dom2efml(document.querySelector('.nav-menu'), {
+        spaces: '    ',
+        ignoreEmptyTextNode: true,
+        // How many extra indents we should add at beginning of every line?
+        indentOffset: 0,
+    }));
+})();
 ```
 
 ## AST Output
